@@ -42,6 +42,20 @@ export default function ContactPage() {
               </p>
             </div>
 
+            {/* Map Embed */}
+            <div className="mb-6 aspect-video w-full rounded-lg overflow-hidden border border-cream/20">
+              <iframe
+                src="https://www.google.com/maps?q=Block+2+Niran+Obayanju+Drive+Ajayi-Apata+Newtown+Estate+Lekki-Epe+Expressway+Lagos&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Apex Narrative Location Map"
+              />
+            </div>
+
             {/* Email */}
             <div className="mb-6">
               <h3 className="text-sm font-semibold uppercase tracking-wider text-gold mb-1">
