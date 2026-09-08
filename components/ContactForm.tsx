@@ -3,7 +3,7 @@
 import { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Turnstile } from '@marsidev/react-turnstile';
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
 import { contactSchema, type ContactFormValues } from '@/lib/validations/contact';
 import { SERVICE_TYPES } from '@/lib/constants';
 
@@ -13,7 +13,7 @@ export default function ContactForm() {
   const [status, setStatus] = useState<SubmissionStatus>('idle');
   const [submitMessage, setSubmitMessage] = useState('');
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const turnstileRef = useRef<{ reset: () => void }>(null);
+  const turnstileRef = useRef<TurnstileInstance>(null);
 
   const {
     register,
@@ -75,13 +75,7 @@ export default function ContactForm() {
         setSubmitMessage(
           result.message || 'Something went wrong. Please try again later.'
         );
-        // Reset Turnstile on any error (spam, rate-limit, validation, server)
-        if (result.error === 'SPAM_CHECK_FAILED' || result.error === 'RATE_LIMITED') {
-          resetTurnstile();
-        } else {
-          // For other errors, still reset so user can retry
-          resetTurnstile();
-        }
+        resetTurnstile(); // reset on any error
       }
     } catch (error) {
       console.error('Form submission error:', error);
@@ -91,10 +85,7 @@ export default function ContactForm() {
     }
   };
 
-  // Determine if the submit button should be disabled
   const isButtonDisabled = isSubmitting || status === 'submitting' || !turnstileToken;
-
-  // Button label – only show "Sending..." when actually submitting, not for any disabled state
   const buttonLabel = status === 'submitting' ? 'Sending...' : 'Send Message';
 
   const handleTurnstileSuccess = (token: string) => {
@@ -109,7 +100,6 @@ export default function ContactForm() {
 
   return (
     <div>
-      {/* Status message banner */}
       {(status === 'success' || status === 'error') && (
         <div
           className={`p-4 rounded-md mb-6 ${
