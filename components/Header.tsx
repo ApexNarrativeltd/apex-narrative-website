@@ -44,7 +44,7 @@ function HamburgerMenu() {
     { href: '/about', label: 'About' },
     { href: '/services', label: 'Services' },
     { href: '/contact', label: 'Contact' },
-    { href: '/portfolio', label: 'Portfolio' },
+    { href: '/work', label: 'Portfolio' },
     { href: '/who-we-work-with', label: 'Who We Work With' },
   ];
 
