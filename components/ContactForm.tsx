@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Turnstile } from '@marsidev/react-turnstile';
@@ -13,6 +13,7 @@ export default function ContactForm() {
   const [status, setStatus] = useState<SubmissionStatus>('idle');
   const [submitMessage, setSubmitMessage] = useState('');
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileRef = useRef<{ reset: () => void }>(null);
 
   const {
     register,
@@ -32,11 +33,18 @@ export default function ContactForm() {
     },
   });
 
+  const resetTurnstile = () => {
+    if (turnstileRef.current) {
+      turnstileRef.current.reset();
+    }
+    setTurnstileToken(null);
+  };
+
   const onSubmit = async (data: ContactFormValues) => {
-    // If Turnstile token is missing, don't proceed
     if (!turnstileToken) {
       setStatus('error');
       setSubmitMessage('Please complete the security check before submitting.');
+      resetTurnstile();
       return;
     }
 
@@ -51,7 +59,7 @@ export default function ContactForm() {
         },
         body: JSON.stringify({
           ...data,
-          turnstileToken, // Include the token for server verification
+          turnstileToken,
         }),
       });
 
@@ -61,38 +69,42 @@ export default function ContactForm() {
         setStatus('success');
         setSubmitMessage(result.message || "Thank you — we'll be in touch within 24 hours.");
         reset();
-        setTurnstileToken(null); // Reset Turnstile after success
+        resetTurnstile();
       } else {
         setStatus('error');
         setSubmitMessage(
           result.message || 'Something went wrong. Please try again later.'
         );
-        // If the error is spam-related, reset Turnstile
+        // Reset Turnstile on any error (spam, rate-limit, validation, server)
         if (result.error === 'SPAM_CHECK_FAILED' || result.error === 'RATE_LIMITED') {
-          setTurnstileToken(null);
+          resetTurnstile();
+        } else {
+          // For other errors, still reset so user can retry
+          resetTurnstile();
         }
       }
     } catch (error) {
       console.error('Form submission error:', error);
       setStatus('error');
       setSubmitMessage('Something went wrong. Please try again later.');
+      resetTurnstile();
     }
   };
 
   // Determine if the submit button should be disabled
   const isButtonDisabled = isSubmitting || status === 'submitting' || !turnstileToken;
 
-  // Handle Turnstile success
+  // Button label – only show "Sending..." when actually submitting, not for any disabled state
+  const buttonLabel = status === 'submitting' ? 'Sending...' : 'Send Message';
+
   const handleTurnstileSuccess = (token: string) => {
     setTurnstileToken(token);
   };
 
-  // Handle Turnstile error or expiry
   const handleTurnstileError = () => {
-    setTurnstileToken(null);
+    resetTurnstile();
   };
 
-  // Public site key from environment variable
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
   return (
@@ -261,6 +273,7 @@ export default function ContactForm() {
         {siteKey && (
           <div className="flex justify-center py-2">
             <Turnstile
+              ref={turnstileRef}
               siteKey={siteKey}
               onSuccess={handleTurnstileSuccess}
               onError={handleTurnstileError}
@@ -272,7 +285,6 @@ export default function ContactForm() {
             />
           </div>
         )}
-        {/* Fallback if site key is missing */}
         {!siteKey && (
           <p className="text-yellow-400 text-sm text-center">
             Security check not configured. Please contact support.
@@ -286,7 +298,7 @@ export default function ContactForm() {
             disabled={isButtonDisabled}
             className="w-full md:w-auto px-8 py-3 bg-gold text-near-black font-semibold rounded-md hover:brightness-110 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black"
           >
-            {isButtonDisabled ? 'Sending...' : 'Send Message'}
+            {buttonLabel}
           </button>
           {!turnstileToken && status !== 'submitting' && (
             <p className="text-xs text-cream/50 mt-2">
