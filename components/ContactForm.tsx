@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Turnstile } from '@marsidev/react-turnstile';
 import { contactSchema, type ContactFormValues } from '@/lib/validations/contact';
 import { SERVICE_TYPES } from '@/lib/constants';
 
@@ -11,6 +12,7 @@ type SubmissionStatus = 'idle' | 'submitting' | 'success' | 'error';
 export default function ContactForm() {
   const [status, setStatus] = useState<SubmissionStatus>('idle');
   const [submitMessage, setSubmitMessage] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const {
     register,
@@ -31,6 +33,13 @@ export default function ContactForm() {
   });
 
   const onSubmit = async (data: ContactFormValues) => {
+    // If Turnstile token is missing, don't proceed
+    if (!turnstileToken) {
+      setStatus('error');
+      setSubmitMessage('Please complete the security check before submitting.');
+      return;
+    }
+
     setStatus('submitting');
     setSubmitMessage('');
 
@@ -40,7 +49,10 @@ export default function ContactForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          turnstileToken, // Include the token for server verification
+        }),
       });
 
       const result = await response.json();
@@ -48,24 +60,40 @@ export default function ContactForm() {
       if (response.ok && result.success) {
         setStatus('success');
         setSubmitMessage(result.message || "Thank you — we'll be in touch within 24 hours.");
-        reset(); // Clear the form on success
+        reset();
+        setTurnstileToken(null); // Reset Turnstile after success
       } else {
         setStatus('error');
         setSubmitMessage(
           result.message || 'Something went wrong. Please try again later.'
         );
+        // If the error is spam-related, reset Turnstile
+        if (result.error === 'SPAM_CHECK_FAILED' || result.error === 'RATE_LIMITED') {
+          setTurnstileToken(null);
+        }
       }
     } catch (error) {
       console.error('Form submission error:', error);
       setStatus('error');
       setSubmitMessage('Something went wrong. Please try again later.');
     }
-    // NOTE: Do NOT reset status to 'idle' here – we want the banner to persist.
-    // The user can dismiss it by starting a new submission or refreshing.
   };
 
   // Determine if the submit button should be disabled
-  const isButtonDisabled = isSubmitting || status === 'submitting';
+  const isButtonDisabled = isSubmitting || status === 'submitting' || !turnstileToken;
+
+  // Handle Turnstile success
+  const handleTurnstileSuccess = (token: string) => {
+    setTurnstileToken(token);
+  };
+
+  // Handle Turnstile error or expiry
+  const handleTurnstileError = () => {
+    setTurnstileToken(null);
+  };
+
+  // Public site key from environment variable
+  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
   return (
     <div>
@@ -229,6 +257,28 @@ export default function ContactForm() {
           </p>
         )}
 
+        {/* Cloudflare Turnstile */}
+        {siteKey && (
+          <div className="flex justify-center py-2">
+            <Turnstile
+              siteKey={siteKey}
+              onSuccess={handleTurnstileSuccess}
+              onError={handleTurnstileError}
+              onExpire={handleTurnstileError}
+              options={{
+                theme: 'dark',
+                size: 'normal',
+              }}
+            />
+          </div>
+        )}
+        {/* Fallback if site key is missing */}
+        {!siteKey && (
+          <p className="text-yellow-400 text-sm text-center">
+            Security check not configured. Please contact support.
+          </p>
+        )}
+
         {/* Submit button */}
         <div>
           <button
@@ -238,6 +288,11 @@ export default function ContactForm() {
           >
             {isButtonDisabled ? 'Sending...' : 'Send Message'}
           </button>
+          {!turnstileToken && status !== 'submitting' && (
+            <p className="text-xs text-cream/50 mt-2">
+              Please complete the security check to submit.
+            </p>
+          )}
         </div>
       </form>
     </div>

@@ -1,27 +1,88 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { contactSchema } from '@/lib/validations/contact';
+import { checkRateLimit } from '@/lib/rate-limit';
 
 // Initialize Resend with the API key from environment variables
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+// Cloudflare Turnstile verification endpoint
+const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+
 export async function POST(request: NextRequest) {
   try {
-    // Parse the incoming JSON body
-    const body = await request.json();
+    // --- Step 1: Rate Limiting (IP-based) ---
+    // Get the client IP from standard headers (Vercel uses x-forwarded-for)
+    const forwardedFor = request.headers.get('x-forwarded-for');
+    const ip = forwardedFor?.split(',')[0]?.trim() || 'anonymous';
 
-    // Server-side validation using the shared Zod schema
-    const result = contactSchema.safeParse(body);
+    const rateLimitResult = checkRateLimit(ip);
+    if (!rateLimitResult.allowed) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'RATE_LIMITED',
+          message: 'Too many requests. Please try again later.',
+        },
+        { status: 429 }
+      );
+    }
+
+    // --- Step 2: Turnstile Verification ---
+    const body = await request.json();
+    const { turnstileToken, ...formData } = body;
+
+    if (!turnstileToken) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'SPAM_CHECK_FAILED',
+          message: 'Security check failed. Please complete the verification.',
+        },
+        { status: 400 }
+      );
+    }
+
+    // Verify the token with Cloudflare
+    const verifyFormData = new URLSearchParams();
+    verifyFormData.append('secret', process.env.TURNSTILE_SECRET_KEY || '');
+    verifyFormData.append('response', turnstileToken);
+    // Optionally pass the client IP for better spam detection
+    if (ip !== 'anonymous') {
+      verifyFormData.append('remoteip', ip);
+    }
+
+    const verifyResponse = await fetch(TURNSTILE_VERIFY_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: verifyFormData,
+    });
+
+    const verifyData = await verifyResponse.json();
+
+    if (!verifyData.success) {
+      console.warn('Turnstile verification failed:', verifyData);
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'SPAM_CHECK_FAILED',
+          message: 'Security check failed. Please try again.',
+        },
+        { status: 400 }
+      );
+    }
+
+    // --- Step 3: Zod Validation (server-side) ---
+    const result = contactSchema.safeParse(formData);
 
     if (!result.success) {
-      // Return validation errors with 422 status
       return NextResponse.json(
         {
           success: false,
           error: 'VALIDATION_ERROR',
           message: 'Please check your input and try again.',
-          // Optionally include details for debugging (but don't expose in production)
-          // details: result.error.flatten(),
         },
         { status: 422 }
       );
@@ -29,7 +90,7 @@ export async function POST(request: NextRequest) {
 
     const { name, email, company, serviceInterest, message } = result.data;
 
-    // Build the email content
+    // --- Step 4: Send emails via Resend ---
     const subject = `New Contact Enquiry from ${name} – ${serviceInterest}`;
     const emailText = `
 Name: ${name}
@@ -50,7 +111,6 @@ ${message}
       <p>${message.replace(/\n/g, '<br />')}</p>
     `;
 
-    // Auto-confirmation content
     const confirmSubject = `Thank you for contacting Apex Narrative!`;
     const confirmText = `
 Dear ${name},
@@ -73,17 +133,16 @@ Apex Narrative Team
     `;
 
     const fromAddress = process.env.EMAIL_FROM_ADDRESS || 'onboarding@resend.dev';
+    const notificationRecipient = process.env.CONTACT_NOTIFICATION_EMAIL || 'hello@apexnarrativeltd.com';
 
-    // Send notification email to Apex Narrative
     const notificationResult = await resend.emails.send({
       from: fromAddress,
-      to: 'hello@apexnarrativeltd.com',
+      to: notificationRecipient,
       subject: subject,
       text: emailText,
       html: emailHtml,
     });
 
-    // Send auto-confirmation email to the visitor
     const confirmationResult = await resend.emails.send({
       from: fromAddress,
       to: email,
@@ -92,7 +151,6 @@ Apex Narrative Team
       html: confirmHtml,
     });
 
-    // Check if both emails were sent successfully
     if (notificationResult.error || confirmationResult.error) {
       console.error('Resend error:', notificationResult.error || confirmationResult.error);
       return NextResponse.json(
@@ -105,7 +163,6 @@ Apex Narrative Team
       );
     }
 
-    // Success response – matches the API & Integration documentation
     return NextResponse.json({
       success: true,
       message: "Thank you — we'll be in touch within 24 hours.",
