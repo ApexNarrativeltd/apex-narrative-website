@@ -59,9 +59,9 @@ export default function ContactForm() {
       console.error('Form submission error:', error);
       setStatus('error');
       setSubmitMessage('Something went wrong. Please try again later.');
-    } finally {
-      setStatus('idle');
     }
+    // NOTE: Do NOT reset status to 'idle' here – we want the banner to persist.
+    // The user can dismiss it by starting a new submission or refreshing.
   };
 
   // Determine if the submit button should be disabled
