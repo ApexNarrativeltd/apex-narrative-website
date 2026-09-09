@@ -16,7 +16,7 @@ export default function StructuredData() {
       streetAddress:
         'Block 2, Niran Obayanju Drive, Ajayi-Apata Newtown Estate, Opposite Mobile Filling Station',
       addressLocality: 'Lagos',
-      addressCountry: 'Nigeria',
+      addressCountry: 'NG', // ISO 2-letter country code
     },
     sameAs: [
       // TODO: Add social media URLs once confirmed
