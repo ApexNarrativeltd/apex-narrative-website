@@ -20,11 +20,11 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-gold mb-3">Company</h3>
             <ul className="space-y-2">
-              <li><Link href="/" className="hover:text-gold transition-colors">Home</Link></li>
-              <li><Link href="/about" className="hover:text-gold transition-colors">About</Link></li>
-              <li><Link href="/services" className="hover:text-gold transition-colors">Services</Link></li>
-              <li><Link href="/work" className="hover:text-gold transition-colors">Portfolio</Link></li>
-              <li><Link href="/contact" className="hover:text-gold transition-colors">Contact</Link></li>
+              <li><Link href="/" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Home</Link></li>
+              <li><Link href="/about" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">About</Link></li>
+              <li><Link href="/services" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Services</Link></li>
+              <li><Link href="/work" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Portfolio</Link></li>
+              <li><Link href="/contact" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Contact</Link></li>
             </ul>
           </div>
 
@@ -32,10 +32,10 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-gold mb-3">Services</h3>
             <ul className="space-y-2">
-              <li><Link href="/services/real-estate-media" className="hover:text-gold transition-colors">Real Estate Media</Link></li>
-              <li><Link href="/services/brand-marketing-films" className="hover:text-gold transition-colors">Brand &amp; Marketing Films</Link></li>
-              <li><Link href="/services/event-coverage" className="hover:text-gold transition-colors">Event Coverage</Link></li>
-              <li><Link href="/services/social-media-content-packages" className="hover:text-gold transition-colors">Social Media Content Packages</Link></li>
+              <li><Link href="/services/real-estate-media" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Real Estate Media</Link></li>
+              <li><Link href="/services/brand-marketing-films" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Brand &amp; Marketing Films</Link></li>
+              <li><Link href="/services/event-coverage" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Event Coverage</Link></li>
+              <li><Link href="/services/social-media-content-packages" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Social Media Content Packages</Link></li>
             </ul>
           </div>
 
@@ -43,11 +43,11 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-gold mb-3">Who We Work With</h3>
             <ul className="space-y-2">
-              <li><Link href="/who-we-work-with#real-estate" className="hover:text-gold transition-colors">Real Estate Agencies</Link></li>
-              <li><Link href="/who-we-work-with#smes" className="hover:text-gold transition-colors">SMEs &amp; Startups</Link></li>
-              <li><Link href="/who-we-work-with#corporate" className="hover:text-gold transition-colors">Corporate Brands</Link></li>
-              <li><Link href="/who-we-work-with#hospitality" className="hover:text-gold transition-colors">Hospitality &amp; Events</Link></li>
-              <li><Link href="/who-we-work-with#personal" className="hover:text-gold transition-colors">Personal Brands / Influencers</Link></li>
+              <li><Link href="/who-we-work-with#real-estate" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Real Estate Agencies</Link></li>
+              <li><Link href="/who-we-work-with#smes" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">SMEs &amp; Startups</Link></li>
+              <li><Link href="/who-we-work-with#corporate" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Corporate Brands</Link></li>
+              <li><Link href="/who-we-work-with#hospitality" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Hospitality &amp; Events</Link></li>
+              <li><Link href="/who-we-work-with#personal" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Personal Brands / Influencers</Link></li>
             </ul>
           </div>
         </div>

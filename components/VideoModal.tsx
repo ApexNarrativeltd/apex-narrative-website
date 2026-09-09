@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
 
 interface VideoModalProps {
@@ -13,14 +13,77 @@ interface VideoModalProps {
 export default function VideoModal({ isOpen, onClose, videoUrl, title }: VideoModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
-  // Close on Escape key
+  // Check for reduced-motion preference
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handler = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
+    };
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  // Store the element that had focus before modal opened
+  useEffect(() => {
+    if (isOpen) {
+      previousFocusRef.current = document.activeElement as HTMLElement;
+      // Focus the close button when modal opens
+      setTimeout(() => {
+        closeButtonRef.current?.focus();
+      }, 100);
+    } else {
+      // Return focus to the previous element when modal closes
+      if (previousFocusRef.current) {
+        previousFocusRef.current.focus();
+        previousFocusRef.current = null;
+      }
+    }
+  }, [isOpen]);
+
+  // Focus trap: keep focus inside the modal
+  useEffect(() => {
+    if (!isOpen) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
+      // Escape key closes modal
+      if (e.key === 'Escape') {
         onClose();
+        return;
+      }
+
+      // Trap focus inside modal
+      if (e.key === 'Tab') {
+        const focusableElements = modalRef.current?.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+
+        if (!focusableElements || focusableElements.length === 0) return;
+
+        const firstElement = focusableElements[0] as HTMLElement;
+        const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+
+        if (e.shiftKey) {
+          // Shift + Tab: if on first element, move to last
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          // Tab: if on last element, move to first
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
       }
     };
+
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
@@ -32,29 +95,17 @@ export default function VideoModal({ isOpen, onClose, videoUrl, title }: VideoMo
     }
   };
 
-  // Prevent scroll and handle video playback when modal opens/closes
+  // Prevent scroll when modal is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
-      // Auto-play video if it's a direct file
-      if (videoRef.current && !isYouTubeOrVimeo(videoUrl)) {
-        setTimeout(() => {
-          videoRef.current?.play().catch(() => {
-            // Autoplay may be blocked by browser – user can click play manually
-          });
-        }, 500);
-      }
     } else {
       document.body.style.overflow = 'unset';
-      // Pause video when modal closes
-      if (videoRef.current) {
-        videoRef.current.pause();
-      }
     }
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen, videoUrl]);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -69,12 +120,10 @@ export default function VideoModal({ isOpen, onClose, videoUrl, title }: VideoMo
 
   // Extract video ID from YouTube or Vimeo URL
   const getEmbedUrl = (url: string): string | null => {
-    // YouTube
     const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/);
     if (ytMatch) {
       return `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1&rel=0`;
     }
-    // Vimeo
     const vimeoMatch = url.match(/(?:vimeo\.com\/)(\d+)/);
     if (vimeoMatch) {
       return `https://player.vimeo.com/video/${vimeoMatch[1]}?autoplay=1`;
@@ -85,9 +134,18 @@ export default function VideoModal({ isOpen, onClose, videoUrl, title }: VideoMo
   const isEmbed = isYouTubeOrVimeo(videoUrl);
   const embedUrl = isEmbed ? getEmbedUrl(videoUrl) : null;
 
+  // Conditional classes based on reduced-motion preference
+  const overlayClasses = prefersReducedMotion
+    ? 'fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4'
+    : 'fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4';
+
+  const modalClasses = prefersReducedMotion
+    ? 'relative w-full max-w-4xl bg-near-black rounded-lg overflow-hidden shadow-2xl'
+    : 'relative w-full max-w-4xl bg-near-black rounded-lg overflow-hidden shadow-2xl';
+
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+      className={overlayClasses}
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
@@ -95,12 +153,13 @@ export default function VideoModal({ isOpen, onClose, videoUrl, title }: VideoMo
     >
       <div
         ref={modalRef}
-        className="relative w-full max-w-4xl bg-near-black rounded-lg overflow-hidden shadow-2xl"
+        className={modalClasses}
       >
         {/* Close button */}
         <button
+          ref={closeButtonRef}
           onClick={onClose}
-          className="absolute top-3 right-3 z-10 p-2 bg-black/50 text-cream hover:text-gold rounded-full transition-colors"
+          className="absolute top-3 right-3 z-10 p-2 bg-black/50 text-cream hover:text-gold rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black"
           aria-label="Close video"
         >
           <X className="h-6 w-6" />
@@ -116,7 +175,6 @@ export default function VideoModal({ isOpen, onClose, videoUrl, title }: VideoMo
         {/* Video player */}
         <div className="aspect-video w-full bg-black">
           {isEmbed && embedUrl ? (
-            // YouTube / Vimeo embed
             <iframe
               src={embedUrl}
               className="w-full h-full"
@@ -125,7 +183,6 @@ export default function VideoModal({ isOpen, onClose, videoUrl, title }: VideoMo
               title={title}
             />
           ) : (
-            // Direct video file (Cloudinary, .mp4, etc.)
             <video
               ref={videoRef}
               src={videoUrl}

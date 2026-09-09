@@ -72,7 +72,6 @@ export default function WorkClient() {
     if (item.mediaType === 'video' && item.videoUrl) {
       setSelectedVideo({ url: item.videoUrl, title: item.title });
     }
-    // For photo items, we could open a photo modal here if needed
   };
 
   if (loading) {
@@ -99,7 +98,7 @@ export default function WorkClient() {
         <div className="flex flex-wrap gap-2 mb-8 border-b border-cream/10 pb-4">
           <button
             onClick={() => setActiveFilter('All')}
-            className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
+            className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded ${
               activeFilter === 'All'
                 ? 'text-gold border-gold'
                 : 'text-cream/60 hover:text-cream border-transparent hover:border-cream/20'
@@ -111,7 +110,7 @@ export default function WorkClient() {
             <button
               key={type}
               onClick={() => setActiveFilter(type)}
-              className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
+              className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded ${
                 activeFilter === type
                   ? 'text-gold border-gold'
                   : 'text-cream/60 hover:text-cream border-transparent hover:border-cream/20'
@@ -152,9 +151,17 @@ export default function WorkClient() {
                 <div
                   key={item._id}
                   onClick={() => handleItemClick(item)}
-                  className={`group bg-cream/5 rounded-lg overflow-hidden border border-cream/10 hover:border-gold/30 transition-all duration-300 cursor-pointer ${
+                  className={`group bg-cream/5 rounded-lg overflow-hidden border border-cream/10 hover:border-gold/30 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black ${
                     isVideo ? 'hover:shadow-lg hover:shadow-gold/10' : ''
                   }`}
+                  tabIndex={0}
+                  role="button"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleItemClick(item);
+                    }
+                  }}
                 >
                   {/* Thumbnail */}
                   <div className="aspect-[4/3] bg-near-black overflow-hidden relative">
@@ -206,7 +213,7 @@ export default function WorkClient() {
                       <p className="text-cream/40 text-xs mt-1">{item.client}</p>
                     )}
                     {item.duration && (
-                      <p className="text-cream/30 text-xs mt-1">⏱ {item.duration}</p>
+                      <p className="text-cream/40 text-xs mt-1">⏱ {item.duration}</p>
                     )}
                   </div>
                 </div>
