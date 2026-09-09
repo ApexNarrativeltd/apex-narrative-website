@@ -40,18 +40,18 @@ function HamburgerMenu() {
 
   // All navigation links
   const allLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/services', label: 'Services' },
-  { href: '/contact', label: 'Contact' },
-  { href: '/work', label: 'Portfolio' },
-  { href: '/who-we-work-with', label: 'Who We Work With' },
-  { href: '/our-process', label: 'Our Process' }, // <-- ADD THIS
-];
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/services', label: 'Services' },
+    { href: '/contact', label: 'Contact' },
+    { href: '/work', label: 'Portfolio' },
+    { href: '/who-we-work-with', label: 'Who We Work With' },
+    { href: '/our-process', label: 'Our Process' },
+  ];
 
   // Links that appear in the inline nav on desktop (Home, About, Services, Contact)
   const inlineNavLinks = allLinks.slice(0, 4);
-  // Extra links for the hamburger dropdown on desktop (Portfolio, Who We Work With)
+  // Extra links for the hamburger dropdown on desktop (Portfolio, Who We Work With, Our Process)
   const extraLinks = allLinks.slice(4);
 
   return (
@@ -61,7 +61,7 @@ function HamburgerMenu() {
         onClick={toggleMenu}
         aria-expanded={isOpen}
         aria-label="Toggle navigation menu"
-        className="flex items-center justify-center p-2 text-cream hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold rounded"
+        className="flex items-center justify-center p-2 text-cream hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-navy rounded"
       >
         {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </button>
@@ -76,20 +76,20 @@ function HamburgerMenu() {
                 key={link.href}
                 href={link.href}
                 onClick={closeMenu}
-                className="block px-4 py-2 text-cream hover:bg-gold/10 hover:text-gold transition-colors"
+                className="block px-4 py-2 text-cream hover:bg-gold/10 hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-inset"
               >
                 {link.label}
               </Link>
             ))}
           </div>
-          {/* Desktop: show only the extra links (Portfolio, Who We Work With) */}
+          {/* Desktop: show only the extra links (Portfolio, Who We Work With, Our Process) */}
           <div className="hidden md:block">
             {extraLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={closeMenu}
-                className="block px-4 py-2 text-cream hover:bg-gold/10 hover:text-gold transition-colors"
+                className="block px-4 py-2 text-cream hover:bg-gold/10 hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-inset"
               >
                 {link.label}
               </Link>
@@ -101,26 +101,49 @@ function HamburgerMenu() {
   );
 }
 
-// Main Header component (Server Component – but the whole file is marked "use client" because of the child component)
+// Main Header component
 export default function Header() {
   return (
     <header className="bg-navy text-cream border-b border-gold/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="text-xl font-bold tracking-tight hover:text-gold transition-colors">
+          <Link
+            href="/"
+            className="text-xl font-bold tracking-tight hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-navy rounded"
+          >
             Apex Narrative
           </Link>
 
           {/* Desktop inline navigation (Home, About, Services, Contact) */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="hover:text-gold transition-colors">Home</Link>
-            <Link href="/about" className="hover:text-gold transition-colors">About</Link>
-            <Link href="/services" className="hover:text-gold transition-colors">Services</Link>
-            <Link href="/contact" className="hover:text-gold transition-colors">Contact</Link>
+            <Link
+              href="/"
+              className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-navy rounded px-1"
+            >
+              Home
+            </Link>
+            <Link
+              href="/about"
+              className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-navy rounded px-1"
+            >
+              About
+            </Link>
+            <Link
+              href="/services"
+              className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-navy rounded px-1"
+            >
+              Services
+            </Link>
+            <Link
+              href="/contact"
+              className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-navy rounded px-1"
+            >
+              Contact
+            </Link>
           </nav>
 
-          {/* Hamburger menu (visible on all screen sizes) */}
+          {/* Hamburger menu */}
           <HamburgerMenu />
         </div>
       </div>
