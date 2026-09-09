@@ -4,6 +4,8 @@ import ProcessSteps from '@/components/ProcessSteps';
 
 export const metadata: Metadata = {
   title: 'Apex Narrative – Services',
+  description:
+    'Explore Apex Narrative\'s services: Real Estate Media, Brand & Marketing Films, Event Coverage, and Social Media Content Packages.',
 };
 
 const services = [

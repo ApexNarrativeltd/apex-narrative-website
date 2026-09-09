@@ -4,6 +4,7 @@ import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import StructuredData from '@/components/StructuredData';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -34,6 +35,7 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${bricolageGrotesque.variable}`}
     >
       <body className="flex flex-col min-h-screen bg-cream text-near-black">
+        <StructuredData />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

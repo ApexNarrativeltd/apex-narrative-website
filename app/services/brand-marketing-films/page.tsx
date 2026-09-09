@@ -5,6 +5,8 @@ import ServiceBlock from '@/components/ServiceBlock';
 
 export const metadata: Metadata = {
   title: 'Apex Narrative – Brand & Marketing Films',
+  description:
+    'Brand & Marketing Films by Apex Narrative: Testimonial Videos, Product Launches, Promotional Videos, and Company Profiles.',
 };
 
 const deliverables = [

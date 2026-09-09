@@ -9,6 +9,8 @@ import {
 
 export const metadata: Metadata = {
   title: 'Apex Narrative – Who We Work With',
+  description:
+    'Apex Narrative works with Real Estate Agencies, SMEs, Corporate Brands, Hospitality & Events, and Personal Brands.',
 };
 
 // Placeholder copy — pending final FRD sign-off.

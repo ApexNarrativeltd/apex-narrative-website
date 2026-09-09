@@ -5,6 +5,8 @@ import ServiceBlock from '@/components/ServiceBlock';
 
 export const metadata: Metadata = {
   title: 'Apex Narrative – Real Estate Media',
+  description:
+    'Real Estate Media services from Apex Narrative: Drone Photography, Property Walkthrough Videos, Promotional Campaigns, and more.',
 };
 
 const deliverables = [
