@@ -40,13 +40,14 @@ function HamburgerMenu() {
 
   // All navigation links
   const allLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/about', label: 'About' },
-    { href: '/services', label: 'Services' },
-    { href: '/contact', label: 'Contact' },
-    { href: '/work', label: 'Portfolio' },
-    { href: '/who-we-work-with', label: 'Who We Work With' },
-  ];
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/services', label: 'Services' },
+  { href: '/contact', label: 'Contact' },
+  { href: '/work', label: 'Portfolio' },
+  { href: '/who-we-work-with', label: 'Who We Work With' },
+  { href: '/our-process', label: 'Our Process' }, // <-- ADD THIS
+];
 
   // Links that appear in the inline nav on desktop (Home, About, Services, Contact)
   const inlineNavLinks = allLinks.slice(0, 4);
