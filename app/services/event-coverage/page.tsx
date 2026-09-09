@@ -5,8 +5,9 @@ import ServiceBlock from '@/components/ServiceBlock';
 
 export const metadata: Metadata = {
   title: 'Apex Narrative – Event Coverage',
+  description:
+    'Event Coverage services from Apex Narrative: Conferences, Highlight Films, Live Streaming, and Award Ceremonies.',
 };
-
 const deliverables = [
   'Conferences & Summits',
   'Event Highlight Films',

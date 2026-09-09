@@ -5,6 +5,8 @@ import ThreeColumnConnector from '@/components/ThreeColumnConnector';
 
 export const metadata: Metadata = {
   title: 'Apex Narrative – About Us',
+  description:
+    'Learn about Apex Narrative – our mission, vision, and brand promise. We help African brands tell better stories through cinematic content.',
 };
 
 export default function AboutPage() {

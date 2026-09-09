@@ -5,6 +5,8 @@ import ServiceBlock from '@/components/ServiceBlock';
 
 export const metadata: Metadata = {
   title: 'Apex Narrative – Social Media Content Packages',
+  description:
+    'Social Media Content Packages from Apex Narrative: Content Planning, Motion Graphics, Short-Form Videos, and Campaign Content.',
 };
 
 const deliverables = [

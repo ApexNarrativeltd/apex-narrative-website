@@ -4,7 +4,9 @@ import PageHeroBanner from "@/components/PageHeroBanner";
 import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Apex Narrative – Contact",
+  title: 'Apex Narrative – Contact',
+  description:
+    'Get in touch with Apex Narrative. We\'re ready to discuss your project – Real Estate Media, Brand Films, Event Coverage, or Social Media Content.',
 };
 
 export default function ContactPage() {
