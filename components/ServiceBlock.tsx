@@ -17,17 +17,16 @@ export default function ServiceBlock({
   return (
     <section className="py-12 md:py-16 border-b border-cream/20 last:border-b-0">
       <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-12">
-        {/* Image */}
+        {/* Image with drop shadow */}
         <div className={`w-full md:w-1/2 ${imageOrder}`}>
-          <div
-            className="w-full h-64 md:h-80 bg-cream/10 rounded-lg bg-cover bg-center"
-            style={{
-              backgroundImage: `url(${imagePath})`,
-              backgroundColor: '#191919', // fallback near-black
-            }}
-            role="img"
-            aria-label={`${title} illustration`}
-          />
+          <div className="w-full h-64 md:h-80 rounded-lg overflow-hidden shadow-2xl shadow-black/50">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={imagePath}
+              alt={`${title} — Apex Narrative service`}
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
 
         {/* Text */}
