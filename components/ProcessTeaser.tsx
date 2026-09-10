@@ -1,6 +1,3 @@
-import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
-
 const steps = [
   {
     number: 1,
@@ -66,17 +63,6 @@ export default function ProcessTeaser() {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Optional CTA to full process page */}
-        <div className="mt-12 text-center">
-          <Link
-            href="/our-process"
-            className="inline-flex items-center gap-2 text-gold font-semibold hover:underline focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1"
-          >
-            Learn more about our process
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
         </div>
       </div>
     </section>
