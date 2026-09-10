@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
 import WhoWeWorkWithTeaser from '@/components/WhoWeWorkWithTeaser';
 import BrandStorytellingSpotlight from '@/components/BrandStorytellingSpotlight';
+import ProcessTeaser from '@/components/ProcessTeaser';
 
 export const metadata: Metadata = {
   title: 'Apex Narrative – We Help Brands Tell Better Stories',
@@ -43,6 +44,9 @@ export default function HomePage() {
 
       {/* Brand Storytelling spotlight */}
       <BrandStorytellingSpotlight />
+
+      {/* Process teaser */}
+      <ProcessTeaser />
     </>
   );
 }
