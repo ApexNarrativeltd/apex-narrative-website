@@ -51,7 +51,6 @@ function FacebookIcon({ className }: { className?: string }) {
 }
 
 export default function Footer() {
-  // Placeholder social links – real URLs to be confirmed later
   const socialLinks = [
     { platform: 'X', url: '#', Icon: XIcon },
     { platform: 'LinkedIn', url: '#', Icon: LinkedInIcon },
@@ -65,7 +64,7 @@ export default function Footer() {
     <footer className="bg-near-black text-cream border-t border-gold/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Logo lockup + tagline */}
-        <div className="text-center md:text-left mb-8">
+        <div className="text-left mb-8">
           <Link
             href="/"
             className="inline-flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded"
@@ -83,7 +82,7 @@ export default function Footer() {
               <span className="text-cream font-bold text-lg tracking-tight">Narrative</span>
             </div>
           </Link>
-          <p className="text-lg md:text-xl font-secondary text-cream mt-4 max-w-2xl mx-auto md:mx-0">
+          <p className="text-lg md:text-xl font-secondary text-cream mt-4 max-w-md">
             We craft cinematic stories that inspire, engage and leave a lasting impact
           </p>
         </div>

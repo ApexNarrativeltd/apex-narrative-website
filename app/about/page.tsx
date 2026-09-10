@@ -10,7 +10,7 @@ export default function AboutPage() {
   return (
     <div className="bg-near-black text-cream min-h-screen">
       {/* ===== Hero ===== */}
-      <section className="relative w-full h-[70vh] min-h-[500px] overflow-hidden">
+      <section className="relative w-full h-auto min-h-[350px] md:h-[70vh] md:min-h-[500px] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -28,7 +28,8 @@ export default function AboutPage() {
             </h2>
           </div>
 
-          <h1 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-brand-red leading-none mt-8 md:mt-12">
+          {/* Red title: desktop only */}
+          <h1 className="hidden md:block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-brand-red leading-none mt-8 md:mt-12">
             About Us
           </h1>
         </div>
@@ -136,13 +137,11 @@ export default function AboutPage() {
 
       {/* ===== Positioning band – gold card straddles navy/near-black seam ===== */}
       <section className="relative">
-        {/* Background: navy top half, near-black bottom half — behind the card */}
         <div className="absolute inset-0" aria-hidden="true">
           <div className="h-1/2 bg-navy" />
           <div className="h-1/2 bg-near-black" />
         </div>
 
-        {/* Gold card, sits on top of the seam */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
           <PositioningBand
             label="Our Positioning"
