@@ -4,6 +4,8 @@ import WhoWeWorkWithTeaser from '@/components/WhoWeWorkWithTeaser';
 import BrandStorytellingSpotlight from '@/components/BrandStorytellingSpotlight';
 import ProcessTeaser from '@/components/ProcessTeaser';
 import PortfolioTeaser from '@/components/PortfolioTeaser';
+import FinalCTA from '@/components/FinalCTA';
+import TrustedByBrands from '@/components/TrustedByBrands';
 
 export const metadata: Metadata = {
   title: 'Apex Narrative – We Help Brands Tell Better Stories',
@@ -51,6 +53,12 @@ export default function HomePage() {
 
       {/* Portfolio teaser – real Sanity data */}
       <PortfolioTeaser />
+
+      {/* Final CTA */}
+      <FinalCTA />
+
+      {/* Trusted by Brands (mobile-only, placeholder) */}
+      <TrustedByBrands />
     </>
   );
 }
