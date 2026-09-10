@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { MessageCircle } from 'lucide-react';
+import PositioningBand from '@/components/PositioningBand';
 
 export const metadata: Metadata = {
   title: 'Apex Narrative – About Us',
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="bg-near-black text-cream min-h-screen">
-      {/* ===== Hero: single continuous section with stacked text top-left ===== */}
+      {/* ===== Hero ===== */}
       <section className="relative w-full h-[70vh] min-h-[500px] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -36,7 +37,6 @@ export default function AboutPage() {
       {/* ===== Three-column staggered section ===== */}
       <section className="relative pt-16 md:pt-24 pb-8 md:pb-12 bg-near-black">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Desktop: staggered layout with connector */}
           <div className="hidden md:block relative min-h-[600px]">
             <svg
               className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible"
@@ -98,7 +98,6 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Mobile: simple stacked, no connector, no border, no triangle */}
           <div className="md:hidden space-y-10">
             <div className="text-center">
               <h2 className="text-lg font-medium text-cream mb-3 tracking-wide">Our Mission</h2>
@@ -121,7 +120,6 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Mobile-only: inline Chat Now button below the three-column block */}
         <div className="md:hidden mt-12 flex justify-center px-4">
           <a
             href="https://wa.me/2348133105922"
@@ -136,47 +134,21 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ===== Positioning Band ===== */}
-
-      {/* Mobile: two-tone with navy strip + inset gold card */}
-      <section className="md:hidden relative">
-        <div className="bg-navy pt-8 pb-16">
-          <div className="max-w-4xl mx-auto px-4">
-            <div className="bg-gold text-near-black rounded-3xl py-12 px-6 shadow-xl -mb-8 relative z-10">
-              <div className="text-center">
-                <h2 className="text-2xl font-bold mb-6 tracking-wide">
-                  Our Positioning
-                </h2>
-                <p className="text-base leading-relaxed text-near-black/80">
-                  <strong className="font-bold text-near-black">
-                    A Distinct Voice in Africa&apos;s Media Production Landscape.
-                  </strong>{' '}
-                  At Apex Narrative, we combine strategic thinking, creative storytelling, and world-class production to help African brands communicate with confidence. We don&apos;t just create content, we craft narratives that help brands stand out, connect with the right audience, and compete on a global stage.
-                </p>
-              </div>
-            </div>
-          </div>
+      {/* ===== Positioning band – gold card straddles navy/near-black seam ===== */}
+      <section className="relative">
+        {/* Background: navy top half, near-black bottom half — behind the card */}
+        <div className="absolute inset-0" aria-hidden="true">
+          <div className="h-1/2 bg-navy" />
+          <div className="h-1/2 bg-near-black" />
         </div>
-        {/* Spacer so the card's negative bottom margin doesn't overlap next section */}
-        <div className="bg-near-black h-8" />
-      </section>
 
-      {/* Desktop: original gold rounded card */}
-      <section className="hidden md:block bg-near-black pb-16 md:pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gold text-near-black rounded-lg py-16 md:py-20 px-6 md:px-12 shadow-xl">
-            <div className="text-center">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 tracking-wide">
-                Our Positioning
-              </h2>
-              <p className="text-base md:text-lg leading-relaxed text-near-black/80 max-w-3xl mx-auto">
-                <strong className="font-bold text-near-black">
-                  A Distinct Voice in Africa&apos;s Media Production Landscape.
-                </strong>{' '}
-                At Apex Narrative, we combine strategic thinking, creative storytelling, and world-class production to help African brands communicate with confidence. We don&apos;t just create content, we craft narratives that help brands stand out, connect with the right audience, and compete on a global stage.
-              </p>
-            </div>
-          </div>
+        {/* Gold card, sits on top of the seam */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+          <PositioningBand
+            label="Our Positioning"
+            heading="A Distinct Voice in Africa's Media Production Landscape"
+            paragraph="At Apex Narrative, we combine strategic thinking, creative storytelling, and world-class production to help African brands communicate with confidence. We don't just create content, we craft narratives that help brands stand out, connect with the right audience, and compete on a global stage."
+          />
         </div>
       </section>
     </div>

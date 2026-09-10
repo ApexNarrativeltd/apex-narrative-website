@@ -6,7 +6,7 @@ interface PositioningBandProps {
 
 export default function PositioningBand({ label, heading, paragraph }: PositioningBandProps) {
   return (
-    <section className="bg-gold text-near-black py-16 md:py-20">
+    <section className="bg-gold text-near-black rounded-2xl py-16 md:py-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {label && (
           <p className="text-sm uppercase tracking-wider text-near-black/60 mb-2 font-secondary">
