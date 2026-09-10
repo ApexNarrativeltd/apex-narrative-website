@@ -3,6 +3,7 @@ import Hero from '@/components/Hero';
 import WhoWeWorkWithTeaser from '@/components/WhoWeWorkWithTeaser';
 import BrandStorytellingSpotlight from '@/components/BrandStorytellingSpotlight';
 import ProcessTeaser from '@/components/ProcessTeaser';
+import PortfolioTeaser from '@/components/PortfolioTeaser';
 
 export const metadata: Metadata = {
   title: 'Apex Narrative – We Help Brands Tell Better Stories',
@@ -47,6 +48,9 @@ export default function HomePage() {
 
       {/* Process teaser */}
       <ProcessTeaser />
+
+      {/* Portfolio teaser – real Sanity data */}
+      <PortfolioTeaser />
     </>
   );
 }
