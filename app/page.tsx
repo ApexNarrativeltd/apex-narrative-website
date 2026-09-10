@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
 import WhoWeWorkWithTeaser from '@/components/WhoWeWorkWithTeaser';
+import BrandStorytellingSpotlight from '@/components/BrandStorytellingSpotlight';
 
 export const metadata: Metadata = {
   title: 'Apex Narrative – We Help Brands Tell Better Stories',
@@ -27,6 +28,21 @@ export default function HomePage() {
 
       {/* Who We Work With teaser */}
       <WhoWeWorkWithTeaser />
+
+      {/* "How We Help Brands Be Seen" heading section */}
+      <section className="bg-near-black py-16 md:py-20">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-cream leading-tight mb-6">
+            How We Help Brands Be Seen
+          </h2>
+          <p className="text-base md:text-lg leading-relaxed text-cream/80">
+            Whether you&apos;re launching a new brand, scaling your business, we create content that tells your story with clarity and purpose.
+          </p>
+        </div>
+      </section>
+
+      {/* Brand Storytelling spotlight */}
+      <BrandStorytellingSpotlight />
     </>
   );
 }
