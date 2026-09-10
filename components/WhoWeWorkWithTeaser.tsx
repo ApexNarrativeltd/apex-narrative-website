@@ -81,7 +81,7 @@ export default function WhoWeWorkWithTeaser() {
                   {segment.description}
                 </p>
                 <Link
-                  href={`/who-we-work-with#${segment.id}`}
+                  href="/contact"
                   className="inline-flex items-center gap-1 text-sm font-semibold text-near-black hover:underline focus:outline-none focus:ring-2 focus:ring-near-black focus:ring-offset-2 focus:ring-offset-gold rounded"
                 >
                   {segment.cta}
