@@ -1,6 +1,5 @@
 export default function StructuredData() {
   // LocalBusiness structured data (JSON-LD)
-  // Schema.org type: ProfessionalService (subtype of LocalBusiness)
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
@@ -11,12 +10,13 @@ export default function StructuredData() {
     url: 'https://apex-narrative-website.vercel.app',
     email: 'hello@apexnarrativeltd.com',
     telephone: '+2348133105922',
+    image: 'https://apex-narrative-website.vercel.app/logo/logo-orange-dark.png',
     address: {
       '@type': 'PostalAddress',
       streetAddress:
         'Block 2, Niran Obayanju Drive, Ajayi-Apata Newtown Estate, Opposite Mobile Filling Station',
       addressLocality: 'Lagos',
-      addressCountry: 'NG', // ISO 2-letter country code
+      addressCountry: 'NG',
     },
     sameAs: [
       // TODO: Add social media URLs once confirmed

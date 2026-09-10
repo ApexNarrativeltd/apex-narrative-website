@@ -22,6 +22,39 @@ export const metadata: Metadata = {
   title: 'Apex Narrative – We Help Brands Tell Better Stories',
   description:
     'Lagos-based media production company. Real Estate Media, Brand Films, Event Coverage, and Social Content. We keep it simple.',
+  icons: {
+    icon: [
+      { url: '/logo/logo-white-dark.png', sizes: '32x32', type: 'image/png' },
+      { url: '/logo/logo-white-dark.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [{ url: '/logo/logo-white-dark.png', sizes: '180x180', type: 'image/png' }],
+  },
+  openGraph: {
+    title: 'Apex Narrative – We Help Brands Tell Better Stories',
+    description:
+      'Lagos-based media production company. Real Estate Media, Brand Films, Event Coverage, and Social Content.',
+    url: 'https://apex-narrative-website.vercel.app',
+    siteName: 'Apex Narrative',
+    images: [
+      {
+        url: '/logo/logo-orange-dark.png',
+        width: 1200,
+        height: 630,
+        alt: 'Apex Narrative – We Help Brands Tell Better Stories',
+      },
+    ],
+    locale: 'en_NG',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Apex Narrative – We Help Brands Tell Better Stories',
+    description:
+      'Lagos-based media production company. Real Estate Media, Brand Films, Event Coverage, and Social Content.',
+    images: ['/logo/logo-orange-dark.png'],
+    site: '@ApexNarrative',
+    creator: '@ApexNarrative',
+  },
 };
 
 export default function RootLayout({
