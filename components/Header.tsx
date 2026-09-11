@@ -94,7 +94,7 @@ export default function Header() {
     <header className="bg-near-black text-cream border-b border-gold/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-24 md:h-28">
-          {/* Logo lockup: icon + very tight wordmark */}
+          {/* Logo lockup: icon + tight wordmark */}
           <Link
             href="/"
             className="flex items-center shrink-0 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded"
@@ -106,6 +106,7 @@ export default function Header() {
               width={96}
               height={96}
               className="h-16 w-auto md:h-20 md:w-auto -mr-3"
+              style={{ width: 'auto', height: 'auto' }}
               priority
             />
             <div className="flex flex-col leading-none font-primary">
