@@ -8,9 +8,9 @@
   --color-near-black: #191919;
   --color-cream: #f4f1ec;
 
-  /* Font families */
-  --font-primary: var(--font-space-grotesk), sans-serif;
-  --font-secondary: var(--font-bricolage-grotesque), sans-serif;
+  /* Font families — Poppins for both */
+  --font-primary: var(--font-poppins), sans-serif;
+  --font-secondary: var(--font-poppins), sans-serif;
 }
 
 @layer base {

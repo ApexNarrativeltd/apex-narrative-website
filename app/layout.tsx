@@ -1,20 +1,15 @@
 import type { Metadata } from 'next';
-import { Space_Grotesk, Bricolage_Grotesque } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import StructuredData from '@/components/StructuredData';
 
-const spaceGrotesk = Space_Grotesk({
+const poppins = Poppins({
   subsets: ['latin'],
-  variable: '--font-space-grotesk',
-  display: 'swap',
-});
-
-const bricolageGrotesque = Bricolage_Grotesque({
-  subsets: ['latin'],
-  variable: '--font-bricolage-grotesque',
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-poppins',
   display: 'swap',
 });
 
@@ -63,10 +58,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${spaceGrotesk.variable} ${bricolageGrotesque.variable}`}
-    >
+    <html lang="en" className={poppins.variable}>
       <body className="flex flex-col min-h-screen bg-cream text-near-black">
         <StructuredData />
         <Header />
