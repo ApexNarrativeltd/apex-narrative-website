@@ -54,7 +54,7 @@ function HamburgerMenu() {
         aria-label="Toggle navigation menu"
         className="flex items-center justify-center p-2 text-cream hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded"
       >
-        {isOpen ? <X className="h-7 w-7 md:h-8 md:w-8" /> : <Menu className="h-7 w-7 md:h-8 md:w-8" />}
+        {isOpen ? <X className="h-6 w-6 md:h-8 md:w-8" /> : <Menu className="h-6 w-6 md:h-8 md:w-8" />}
       </button>
 
       {isOpen && (
@@ -93,8 +93,8 @@ export default function Header() {
   return (
     <header className="bg-near-black text-cream border-b border-gold/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-24 md:h-28">
-          {/* Logo lockup: icon + tight wordmark */}
+        <div className="flex items-center justify-between h-20 md:h-28">
+          {/* Logo lockup */}
           <Link
             href="/"
             className="flex items-center shrink-0 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded"
@@ -105,11 +105,16 @@ export default function Header() {
               alt=""
               width={96}
               height={96}
-              className="h-16 w-auto md:h-20 md:w-auto -mr-3"
+              className="h-6 w-auto md:h-20 md:w-auto -mr-2 md:-mr-3"
               style={{ width: 'auto', height: 'auto' }}
               priority
             />
-            <div className="flex flex-col leading-none font-primary">
+            {/* Mobile: single-line wordmark, big and bold */}
+            <span className="md:hidden text-cream font-bold text-2xl tracking-tight font-primary">
+              Apex Narrative
+            </span>
+            {/* Desktop: stacked wordmark */}
+            <div className="hidden md:flex flex-col leading-none font-primary">
               <span className="text-cream font-bold text-xl md:text-2xl tracking-tight">Apex</span>
               <span className="text-cream font-bold text-xl md:text-2xl tracking-tight">Narrative</span>
             </div>
