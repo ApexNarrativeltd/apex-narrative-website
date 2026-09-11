@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-// Custom SVG icons – lucide-react removed brand logos due to trademark concerns
 function XIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -67,19 +66,19 @@ export default function Footer() {
         <div className="text-left mb-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded"
+            className="inline-flex items-center focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded"
             aria-label="Apex Narrative – Home"
           >
             <Image
               src="/logo/logo-orange-dark.png"
               alt=""
-              width={44}
-              height={44}
-              className="h-11 w-auto"
+              width={96}
+              height={96}
+              className="h-16 w-auto md:h-20 md:w-auto -mr-3"
             />
             <div className="flex flex-col leading-none font-primary">
-              <span className="text-cream font-bold text-lg tracking-tight">Apex</span>
-              <span className="text-cream font-bold text-lg tracking-tight">Narrative</span>
+              <span className="text-cream font-bold text-xl md:text-2xl tracking-tight">Apex</span>
+              <span className="text-cream font-bold text-xl md:text-2xl tracking-tight">Narrative</span>
             </div>
           </Link>
           <p className="text-lg md:text-xl font-secondary text-cream mt-4 max-w-md">

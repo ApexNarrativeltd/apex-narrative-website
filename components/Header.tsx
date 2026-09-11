@@ -52,13 +52,13 @@ function HamburgerMenu() {
         onClick={toggleMenu}
         aria-expanded={isOpen}
         aria-label="Toggle navigation menu"
-        className="flex items-center justify-center p-2 text-cream hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-navy rounded"
+        className="flex items-center justify-center p-2 text-cream hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded"
       >
-        {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        {isOpen ? <X className="h-7 w-7 md:h-8 md:w-8" /> : <Menu className="h-7 w-7 md:h-8 md:w-8" />}
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-full mt-2 w-56 bg-navy border border-gold/20 shadow-lg rounded-md py-2 z-50">
+        <div className="absolute right-0 top-full mt-2 w-56 bg-near-black border border-gold/20 shadow-lg rounded-md py-2 z-50">
           <div className="block md:hidden">
             {allLinks.map((link) => (
               <Link
@@ -91,33 +91,34 @@ function HamburgerMenu() {
 
 export default function Header() {
   return (
-    <header className="bg-navy text-cream border-b border-gold/20">
+    <header className="bg-near-black text-cream border-b border-gold/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-24 md:h-28">
+          {/* Logo lockup: icon + very tight wordmark */}
           <Link
             href="/"
-            className="flex items-center gap-3 shrink-0 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-navy rounded"
+            className="flex items-center shrink-0 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded"
             aria-label="Apex Narrative – Home"
           >
             <Image
               src="/logo/logo-orange-dark.png"
               alt=""
-              width={48}
-              height={48}
-              className="h-12 w-auto"
+              width={96}
+              height={96}
+              className="h-16 w-auto md:h-20 md:w-auto -mr-3"
               priority
             />
             <div className="flex flex-col leading-none font-primary">
-              <span className="text-cream font-bold text-lg tracking-tight">Apex</span>
-              <span className="text-cream font-bold text-lg tracking-tight">Narrative</span>
+              <span className="text-cream font-bold text-xl md:text-2xl tracking-tight">Apex</span>
+              <span className="text-cream font-bold text-xl md:text-2xl tracking-tight">Narrative</span>
             </div>
           </Link>
 
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-navy rounded px-1">Home</Link>
-            <Link href="/about" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-navy rounded px-1">About</Link>
-            <Link href="/services" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-navy rounded px-1">Services</Link>
-            <Link href="/contact" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-navy rounded px-1">Contact</Link>
+          <nav className="hidden md:flex items-center space-x-8 text-base lg:text-lg">
+            <Link href="/" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Home</Link>
+            <Link href="/about" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">About</Link>
+            <Link href="/services" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Services</Link>
+            <Link href="/contact" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Contact</Link>
           </nav>
 
           <HamburgerMenu />
