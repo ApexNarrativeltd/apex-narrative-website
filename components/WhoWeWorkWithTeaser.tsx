@@ -43,14 +43,36 @@ const segments = [
       'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800&q=80',
     flagship: false,
   },
+  {
+    id: 'personal',
+    title: 'Personal Brands / Influencers',
+    description:
+      'We help individuals build a compelling personal brand through professional visual content that resonates with their audience and builds trust.',
+    cta: 'Build Your Persona Brand',
+    image:
+      'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80',
+    flagship: false,
+  },
 ];
 
-export default function WhoWeWorkWithTeaser() {
+interface WhoWeWorkWithTeaserProps {
+  showAll?: boolean;
+}
+
+export default function WhoWeWorkWithTeaser({ showAll = false }: WhoWeWorkWithTeaserProps) {
+  const visibleSegments = showAll ? segments : segments.slice(0, 4);
+
+  // Homepage (4 cards): 2-column grid
+  // Who We Work With (5 cards): 3-column grid on desktop, first row = 3, second row = 2 (left-aligned)
+  const gridClasses = showAll
+    ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8'
+    : 'grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8';
+
   return (
     <section className="bg-near-black py-16 md:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {segments.map((segment) => (
+        <div className={gridClasses}>
+          {visibleSegments.map((segment) => (
             <div
               key={segment.id}
               className="group bg-cream/5 rounded-lg overflow-hidden border border-cream/10 hover:border-gold/30 transition-all duration-300 flex flex-col"
