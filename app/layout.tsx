@@ -2,8 +2,7 @@ import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import FloatingButtons from '@/components/FloatingButtons';
+import ConditionalChrome from '@/components/ConditionalChrome';
 import StructuredData from '@/components/StructuredData';
 
 const poppins = Poppins({
@@ -63,8 +62,7 @@ export default function RootLayout({
         <StructuredData />
         <Header />
         <main className="flex-1">{children}</main>
-        <Footer />
-        <FloatingButtons />
+        <ConditionalChrome />
       </body>
     </html>
   );

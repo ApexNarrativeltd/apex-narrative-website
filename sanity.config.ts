@@ -1,6 +1,6 @@
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
-import { visionTool } from '@sanity/vision';
+import StudioGettingStarted from './components/StudioGettingStarted';
 
 export default defineConfig({
   name: 'apex-narrative-studio',
@@ -12,7 +12,7 @@ export default defineConfig({
   plugins: [
     structureTool({
       name: 'studio',
-      title: 'Studio',
+      title: 'Content',
       structure: (S) =>
         S.list()
           .title('Content')
@@ -20,8 +20,15 @@ export default defineConfig({
             S.documentTypeListItem('portfolioItem').title('Portfolio Items'),
           ]),
     }),
-    // Comment out visionTool if you don't need it
-    // visionTool(),
+  ],
+
+  tools: (prev) => [
+    {
+      name: 'getting-started',
+      title: 'Getting Started',
+      component: StudioGettingStarted,
+    },
+    ...prev,
   ],
 
   schema: {
