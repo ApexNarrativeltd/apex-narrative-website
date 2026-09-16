@@ -15,7 +15,7 @@ export default function ServiceBlock({
   const textOrder = imageSide === 'left' ? 'md:order-2' : 'md:order-1';
 
   return (
-    <section className="py-12 md:py-16 border-b border-cream/20 last:border-b-0">
+    <section className="py-12 md:py-16">
       <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-12">
         {/* Image with drop shadow */}
         <div className={`w-full md:w-1/2 ${imageOrder}`}>
