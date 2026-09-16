@@ -36,9 +36,9 @@ export default function ProcessSteps({
 }: ProcessStepsProps) {
   return (
     <section className="py-16 md:py-20">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <div className="text-center mb-12 md:mb-16">
+        <div className="text-center mb-16 md:mb-20">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-cream leading-tight mb-4">
             {heading}
           </h2>
@@ -47,26 +47,24 @@ export default function ProcessSteps({
           </p>
         </div>
 
-        {/* Steps grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+        {/* Steps grid — 2x2, borderless */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-x-16 md:gap-y-16">
           {steps.map((step) => (
-            <div
-              key={step.number}
-              className="border border-gold/30 rounded-lg p-6 md:p-8 hover:border-gold/60 transition-colors"
-            >
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 inline-flex items-center justify-center w-12 h-12 rounded-full border-2 border-gold text-gold font-bold text-lg">
-                  {step.number}
-                </div>
-                <div>
-                  <h3 className="text-xl md:text-2xl font-bold text-cream mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm md:text-base text-cream/70 leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
+            <div key={step.number} className="text-center">
+              {/* Numbered circle */}
+              <div className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full border-2 border-gold text-gold font-bold text-lg md:text-xl mb-5">
+                {step.number}
               </div>
+
+              {/* Title */}
+              <h3 className="text-xl md:text-2xl font-bold text-cream mb-3">
+                {step.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-sm md:text-base text-cream/70 leading-relaxed max-w-sm mx-auto">
+                {step.description}
+              </p>
             </div>
           ))}
         </div>
