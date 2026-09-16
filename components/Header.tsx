@@ -105,8 +105,7 @@ export default function Header() {
               alt=""
               width={96}
               height={96}
-              className="h-6 w-auto md:h-20 md:w-auto -mr-2 md:-mr-3"
-              style={{ width: 'auto', height: 'auto' }}
+              className="h-12 w-auto md:h-20 md:w-auto -mr-2 md:-mr-3"
               priority
             />
             {/* Mobile: single-line wordmark, big and bold */}
