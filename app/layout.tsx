@@ -3,7 +3,7 @@ import { Poppins } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import WhatsAppButton from '@/components/WhatsAppButton';
+import FloatingButtons from '@/components/FloatingButtons';
 import StructuredData from '@/components/StructuredData';
 
 const poppins = Poppins({
@@ -64,7 +64,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
-        <WhatsAppButton />
+        <FloatingButtons />
       </body>
     </html>
   );
