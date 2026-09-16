@@ -126,7 +126,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Social links — colored circular badges with white icons */}
+        {/* Social links */}
         <div className="mt-10 pt-8 border-t border-gold/10 flex justify-center gap-4">
           {socialLinks.map(({ platform, url, Icon, bgStyle }) => (
             <a
@@ -143,9 +143,15 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Copyright */}
-        <div className="mt-8 pt-4 border-t border-gold/10 text-center text-sm text-cream/70">
+        {/* Copyright + Staff Login */}
+        <div className="mt-8 pt-4 border-t border-gold/10 flex flex-col sm:flex-row justify-between items-center gap-2 text-sm text-cream/70">
           <p>© Apex Narrative. All rights reserved</p>
+          <Link
+  href="/studio"
+  className="text-cream/50 hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1 text-xs"
+>
+  Staff Login
+</Link>
         </div>
       </div>
     </footer>
