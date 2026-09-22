@@ -94,10 +94,10 @@ export default function Header() {
     <header className="bg-near-black text-cream border-b border-gold/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 md:h-28">
-          {/* Logo lockup — single-line, vertically centered */}
+          {/* Logo lockup */}
           <Link
             href="/"
-            className="flex items-center shrink-0 gap-2 md:gap-3 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded"
+            className="flex items-center shrink-0 gap-1 md:gap-1 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded"
             aria-label="Apex Narrative – Home"
           >
             <Image
@@ -105,12 +105,18 @@ export default function Header() {
               alt=""
               width={96}
               height={96}
-              className="h-12 w-12 md:h-20 md:w-20"
+              className="h-12 w-12 md:h-20 md:w-20 shrink-0"
               priority
             />
-            <span className="text-cream font-bold text-2xl md:text-3xl tracking-tight font-primary leading-none">
+            {/* Mobile: single-line wordmark, vertically centered with icon */}
+            <span className="md:hidden text-cream font-bold text-2xl tracking-tight font-primary leading-none flex items-center">
               Apex Narrative
             </span>
+            {/* Desktop: stacked wordmark */}
+            <div className="hidden md:flex flex-col leading-none font-primary">
+              <span className="text-cream font-bold text-xl md:text-2xl tracking-tight">Apex</span>
+              <span className="text-cream font-bold text-xl md:text-2xl tracking-tight">Narrative</span>
+            </div>
           </Link>
 
           <nav className="hidden md:flex items-center space-x-8 text-base lg:text-lg">
