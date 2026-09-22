@@ -34,17 +34,17 @@ function HamburgerMenu() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
 
+  // Services hidden for now — designer request
   const allLinks = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
-    { href: '/services', label: 'Services' },
     { href: '/contact', label: 'Contact' },
     { href: '/work', label: 'Portfolio' },
     { href: '/who-we-work-with', label: 'Who We Work With' },
     { href: '/our-process', label: 'Our Process' },
   ];
 
-  const extraLinks = allLinks.slice(4);
+  const extraLinks = allLinks.slice(3);
 
   return (
     <div ref={menuRef} className="relative">
@@ -94,10 +94,10 @@ export default function Header() {
     <header className="bg-near-black text-cream border-b border-gold/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 md:h-28">
-          {/* Logo lockup */}
+          {/* Logo lockup — single-line, vertically centered */}
           <Link
             href="/"
-            className="flex items-center shrink-0 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded"
+            className="flex items-center shrink-0 gap-2 md:gap-3 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded"
             aria-label="Apex Narrative – Home"
           >
             <Image
@@ -105,24 +105,17 @@ export default function Header() {
               alt=""
               width={96}
               height={96}
-              className="h-12 w-auto md:h-20 md:w-auto -mr-2 md:-mr-3"
+              className="h-12 w-12 md:h-20 md:w-20"
               priority
             />
-            {/* Mobile: single-line wordmark, big and bold */}
-            <span className="md:hidden text-cream font-bold text-2xl tracking-tight font-primary">
+            <span className="text-cream font-bold text-2xl md:text-3xl tracking-tight font-primary leading-none">
               Apex Narrative
             </span>
-            {/* Desktop: stacked wordmark */}
-            <div className="hidden md:flex flex-col leading-none font-primary">
-              <span className="text-cream font-bold text-xl md:text-2xl tracking-tight">Apex</span>
-              <span className="text-cream font-bold text-xl md:text-2xl tracking-tight">Narrative</span>
-            </div>
           </Link>
 
           <nav className="hidden md:flex items-center space-x-8 text-base lg:text-lg">
             <Link href="/" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Home</Link>
             <Link href="/about" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">About</Link>
-            <Link href="/services" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Services</Link>
             <Link href="/contact" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Contact</Link>
           </nav>
 
