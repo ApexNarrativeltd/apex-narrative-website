@@ -34,7 +34,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ===== Mission / Brand Promise / Vision — clean text layout ===== */}
+      {/* ===== Mission / Promise / Vision — clean text layout ===== */}
       <section className="bg-near-black py-16 md:py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -44,24 +44,19 @@ export default function AboutPage() {
               Our Mission
             </h2>
             <p className="text-cream/70 text-sm md:text-base leading-relaxed">
-              To become Africa&apos;s leading media production company, empowering
-              brands to be seen, heard, and remembered through powerful
-              storytelling that inspires connection and drives meaningful impact.
+              To turn ordinary brand stories into powerful narratives that drive real business results.
             </p>
           </div>
 
-          {/* Brand Promise + Our Vision — two equal columns below */}
+          {/* Our Promise + Our Vision — two equal columns below */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
-            {/* Brand Promise */}
+            {/* Our Promise */}
             <div className="text-center">
               <h2 className="text-lg md:text-xl font-medium text-cream mb-3 tracking-wide">
-                Brand Promise
+                Our Promise
               </h2>
               <p className="text-cream/70 text-sm md:text-base leading-relaxed">
-                We promise to partner with every client to create strategic
-                cinematic stories that capture attention, build trust, inspire
-                action, and deliver lasting business impact consistently with
-                stories that elevate brands.
+                Every piece of content we create is built with intention. We guarantee every client leaves with elevated brand perception, a sharper narrative position, and content that continues to deliver.
               </p>
             </div>
 
@@ -71,9 +66,7 @@ export default function AboutPage() {
                 Our Vision
               </h2>
               <p className="text-cream/70 text-sm md:text-base leading-relaxed">
-                To become Africa&apos;s leading media production company, empowering
-                brands to be seen, heard, and remembered through powerful
-                storytelling that inspires connection and drives meaningful impact.
+                To become Africa&apos;s leading media production company for brands that are ready to be seen at the highest level.
               </p>
             </div>
           </div>
