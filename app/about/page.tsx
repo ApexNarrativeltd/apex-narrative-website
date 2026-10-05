@@ -10,7 +10,7 @@ export default function AboutPage() {
   return (
     <div className="bg-near-black text-cream min-h-screen">
       {/* ===== Hero ===== */}
-      <section className="relative w-full h-auto min-h-[400px] md:h-[70vh] md:min-h-[500px] overflow-hidden">
+      <section className="relative w-full h-auto min-h-[300px] md:h-[70vh] md:min-h-[500px] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -22,8 +22,8 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-near-black/50" />
 
         <div className="relative z-10 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between pt-12 md:pt-16 pb-2 md:pb-3">
-          <div className="max-w-md">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-cream leading-tight">
+          <div className="max-w-xs md:max-w-md">
+            <h2 className="text-4xl md:text-4xl lg:text-5xl font-extrabold text-cream leading-tight">
               Built for African Brands. Ready for the World.
             </h2>
           </div>
