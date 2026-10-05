@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
 import WhoWeWorkWithTeaser from '@/components/WhoWeWorkWithTeaser';
-import BrandStorytellingSpotlight from '@/components/BrandStorytellingSpotlight';
+import BrandStorytellingCarousel from '@/components/BrandStorytellingCarousel';
 import ProcessTeaser from '@/components/ProcessTeaser';
 import PortfolioTeaser from '@/components/PortfolioTeaser';
 import FinalCTA from '@/components/FinalCTA';
@@ -44,8 +44,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Brand Storytelling spotlight */}
-      <BrandStorytellingSpotlight />
+      {/* Brand Storytelling carousel */}
+      <BrandStorytellingCarousel />
 
       {/* Process teaser */}
       <ProcessTeaser />
