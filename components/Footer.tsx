@@ -33,6 +33,22 @@ function TikTokIcon({ className }: { className?: string }) {
   );
 }
 
+function YouTubeIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+    </svg>
+  );
+}
+
+function FacebookIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+    </svg>
+  );
+}
+
 export default function Footer() {
   const socialLinks = [
     {
@@ -57,10 +73,22 @@ export default function Footer() {
       },
     },
     {
+      platform: 'YouTube',
+      url: 'https://youtube.com/@narrativebyapex',
+      Icon: YouTubeIcon,
+      bgStyle: { backgroundColor: '#FF0000' },
+    },
+    {
       platform: 'TikTok',
       url: 'https://www.tiktok.com/@apexnarrative',
       Icon: TikTokIcon,
       bgStyle: { backgroundColor: '#000000' },
+    },
+    {
+      platform: 'Facebook',
+      url: 'https://www.facebook.com/share/1B4FJEzQxA/',
+      Icon: FacebookIcon,
+      bgStyle: { backgroundColor: '#1877F2' },
     },
   ];
 
@@ -98,6 +126,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li><Link href="/" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Home</Link></li>
               <li><Link href="/about" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">About</Link></li>
+              <li><Link href="/services" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Services</Link></li>
               <li><Link href="/work" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Portfolio</Link></li>
               <li><Link href="/contact" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Contact</Link></li>
             </ul>
@@ -126,7 +155,7 @@ export default function Footer() {
         </div>
 
         {/* Social links */}
-        <div className="mt-10 pt-8 border-t border-gold/10 flex justify-center gap-4">
+        <div className="mt-10 pt-8 border-t border-gold/10 flex justify-center gap-4 flex-wrap">
           {socialLinks.map(({ platform, url, Icon, bgStyle }) => (
             <a
               key={platform}
@@ -146,11 +175,11 @@ export default function Footer() {
         <div className="mt-8 pt-4 border-t border-gold/10 flex flex-col sm:flex-row justify-between items-center gap-2 text-sm text-cream/70">
           <p>© Apex Narrative. All rights reserved</p>
           <Link
-  href="/studio"
-  className="text-cream/50 hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1 text-xs"
->
-  Staff Login
-</Link>
+            href="/studio"
+            className="text-cream/50 hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1 text-xs"
+          >
+            Staff Login
+          </Link>
         </div>
       </div>
     </footer>
