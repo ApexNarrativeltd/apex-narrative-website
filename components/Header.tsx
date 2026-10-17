@@ -34,7 +34,7 @@ function HamburgerMenu() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
 
-  // Services hidden for now — designer request
+  // Services hidden per designer request
   const allLinks = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
@@ -44,8 +44,6 @@ function HamburgerMenu() {
     { href: '/our-process', label: 'Our Process' },
   ];
 
-  const extraLinks = allLinks.slice(3);
-
   return (
     <div ref={menuRef} className="relative">
       <button
@@ -54,35 +52,21 @@ function HamburgerMenu() {
         aria-label="Toggle navigation menu"
         className="flex items-center justify-center p-2 text-cream hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded"
       >
-        {isOpen ? <X className="h-6 w-6 md:h-8 md:w-8" /> : <Menu className="h-6 w-6 md:h-8 md:w-8" />}
+        {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </button>
 
       {isOpen && (
         <div className="absolute right-0 top-full mt-2 w-56 bg-near-black border border-gold/20 shadow-lg rounded-md py-2 z-50">
-          <div className="block md:hidden">
-            {allLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={closeMenu}
-                className="block px-4 py-2 text-cream hover:bg-gold/10 hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-inset"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-          <div className="hidden md:block">
-            {extraLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={closeMenu}
-                className="block px-4 py-2 text-cream hover:bg-gold/10 hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-inset"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
+          {allLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={closeMenu}
+              className="block px-4 py-2 text-cream hover:bg-gold/10 hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-inset"
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
       )}
     </div>
@@ -97,7 +81,7 @@ export default function Header() {
           {/* Logo lockup */}
           <Link
             href="/"
-            className="flex items-center shrink-0 gap-1 md:gap-1 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded"
+            className="flex items-center shrink-0 gap-1 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded"
             aria-label="Apex Narrative – Home"
           >
             <Image
@@ -108,7 +92,7 @@ export default function Header() {
               className="h-12 w-12 md:h-20 md:w-20 shrink-0"
               priority
             />
-            {/* Mobile: single-line wordmark, vertically centered with icon */}
+            {/* Mobile: single-line wordmark */}
             <span className="md:hidden text-cream font-bold text-2xl tracking-tight font-primary leading-none flex items-center">
               Apex Narrative
             </span>
@@ -119,13 +103,20 @@ export default function Header() {
             </div>
           </Link>
 
-          <nav className="hidden md:flex items-center space-x-8 text-base lg:text-lg">
+          {/* Desktop inline nav — all links, no hamburger */}
+          <nav className="hidden md:flex items-center space-x-6 lg:space-x-8 text-sm lg:text-base">
             <Link href="/" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Home</Link>
             <Link href="/about" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">About</Link>
             <Link href="/contact" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Contact</Link>
+            <Link href="/work" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Portfolio</Link>
+            <Link href="/who-we-work-with" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Who We Work With</Link>
+            <Link href="/our-process" className="hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-near-black rounded px-1">Our Process</Link>
           </nav>
 
-          <HamburgerMenu />
+          {/* Mobile only: hamburger */}
+          <div className="md:hidden">
+            <HamburgerMenu />
+          </div>
         </div>
       </div>
     </header>
